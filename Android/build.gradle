@@ -1,0 +1,316 @@
+buildscript {
+    repositories {
+        maven { url 'https://maven.fabric.io/public' }
+    }
+
+    dependencies {
+        classpath 'io.fabric.tools:gradle:1.27.1'
+    }
+}
+apply plugin: 'com.android.application'
+apply plugin: 'io.fabric'
+
+repositories {
+    maven { url 'https://maven.fabric.io/public' }
+}
+
+
+apply plugin: 'kotlin-android'
+
+dependencies {
+    implementation 'com.android.support:multidex:1.0.1'
+
+    implementation "com.google.android.gms:play-services-base:${play_services_version}"
+    implementation "com.google.android.gms:play-services-maps:${play_services_version}"
+    implementation "com.google.android.gms:play-services-location:${play_services_version}"
+    implementation "com.google.android.gms:play-services-analytics:${play_services_version}"
+    implementation "com.android.support:support-v4:${support_lib_version}"
+    implementation "com.android.support:appcompat-v7:${support_lib_version}"
+    implementation "com.android.support:preference-v7:${support_lib_version}"
+    implementation "com.android.support:preference-v14:${support_lib_version}"
+    implementation "com.android.support:cardview-v7:${support_lib_version}"
+    implementation "com.android.support:recyclerview-v7:${support_lib_version}"
+    implementation "com.android.support:design:${support_lib_version}"
+
+    // Android library to display the changelog
+    implementation 'com.github.gabrielemariotti.changeloglib:changelog:2.0.0'
+
+    //DroneKit-Android client library.
+    //    compile project(':ClientLib')
+//    compile project(':Mavlink')
+    implementation project(':UsbSerialLibrary')
+    //        compile 'com.o3dr.android:dronekit-android:2.9.0'
+
+    implementation 'me.grantland:autofittextview:0.2.1'
+    implementation(name: 'shimmer-android-release', ext: 'aar')
+    implementation(name: 'libuvccamera-release', ext: 'aar')
+    implementation(name: 'sliding-up-panel-3.3.0', ext: 'aar')
+    //    compile(name: 'dronekit-android.1.0.0', ext: 'aar')
+
+    implementation files('libs/droneapi-java-0.3-SNAPSHOT.jar')
+    implementation files('libs/protobuf-java-2.5.0.jar')
+    implementation files('libs/jeromq-0.3.4.jar')
+    implementation files('libs/sius-0.3.0-SNAPSHOT.jar')
+    implementation files('libs/d2xx.jar')
+    implementation files('libs/Mavlink.jar')
+
+    implementation "com.squareup.okhttp:okhttp:${okhttp_version}"
+    implementation "com.squareup.okhttp:okhttp-urlconnection:${okhttp_version}"
+    implementation 'com.jakewharton.timber:timber:3.1.0'
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    implementation('com.crashlytics.sdk.android:crashlytics:2.5.6@aar')
+    {
+        transitive = true;
+    }
+
+    implementation 'com.jakewharton.timber:timber:3.1.0'
+    implementation 'com.jcraft:jsch:0.1.51'
+
+    //Java semver library
+    implementation 'com.github.zafarkhaja:java-semver:0.9.0'
+
+    //MP4 generation library
+    implementation 'com.googlecode.mp4parser:isoparser:1.1.7'
+
+    //Charts and graph library
+    implementation 'com.github.lecho:hellocharts-library:1.5.5@aar'
+    //Progress library
+    implementation 'cc.cloudist.acplibrary:library:1.2.1'
+}
+
+def versionPrefix = "MAP-v"
+
+//Decomposed version name and code (https://plus.google.com/+JakeWharton/posts/6f5TcVPRZij)
+def versionMajor = 1
+def versionMinor = 0
+def versionPatch = 1
+def versionBuild = 2 //bump for dogfood builds, public betas, etc.
+
+//Logging levels
+def logLevelVerbose = 2;
+def logLevelDebug = 3;
+def logLevelInfo = 4;
+def logLevelWarn = 5;
+def logLevelError = 6;
+def logLevelAssert = 7;
+
+def generateVersionName(String versionPrefix, int versionMajor, int versionMinor, int versionPatch, String versionSuffix = ""){
+    def versionName = "${versionPrefix}${versionMajor}.${versionMinor}.${versionPatch}"
+
+    if(versionSuffix != null && !versionSuffix.isEmpty() && versionSuffix != "release"){
+        versionName += "-${versionSuffix}"
+    }
+
+    return versionName
+}
+
+android {
+    compileSdkVersion android_build_sdk_version
+
+    flavorDimensions "1"
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
+
+    defaultConfig {
+        applicationId 'com.map.android'
+        minSdkVersion android_build_min_sdk_version
+        targetSdkVersion android_build_target_sdk_version
+        versionCode computeVersionCode(versionMajor, versionMinor, versionPatch, versionBuild)
+        versionName generateVersionName(versionPrefix, versionMajor, versionMinor, versionPatch)
+
+        buildConfigField "boolean", "WRITE_LOG_FILE", "true"
+        buildConfigField "int", "LOG_FILE_LEVEL", "$logLevelDebug"
+        buildConfigField "boolean", "ENABLE_CRASHLYTICS", "false"
+        buildConfigField "boolean", "SITL_DEBUG", "false"
+        buildConfigField "String", "SOLO_LINK_IP", getSoloLinkIp()
+
+        //Manifest placeholders (http://tools.android.com/tech-docs/new-build-system/user-guide/manifest-merger#TOC-Placeholder-support)
+        manifestPlaceholders = [
+            fabricApiKey:getFabricApiKey()
+        ]
+
+        // Enabling multidex support.
+        multiDexEnabled true
+
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_7
+        targetCompatibility JavaVersion.VERSION_1_7
+    }
+
+    sourceSets {
+        main {
+            manifest.srcFile 'AndroidManifest.xml'
+            java.srcDirs = ['src']
+            resources.srcDirs = ['src']
+            aidl.srcDirs = ['src']
+            renderscript.srcDirs = ['src']
+            res.srcDirs = ['res']
+            assets.srcDirs = ['assets']
+        }
+
+        // Move the build types to build-types/<type>
+        // For instance, build-types/debug/java, build-types/debug/AndroidManifest.xml, ...
+        // This moves them out of them default location under src/<type>/... which would
+        // conflict with src/ being used by the main source set.
+        // Adding new build types or product flavors should be accompanied
+        // by a similar customization.
+        debug.setRoot('build-types/debug')
+        release.setRoot('build-types/release')
+    }
+
+    //FIXME: remove this after lint errors have been taken care of
+    lintOptions {
+        abortOnError false
+    }
+
+    signingConfigs {
+        release {
+            storeFile getAppKeystoreFile()
+            storePassword getAppKeystorePassword()
+            keyAlias getAppKey()
+            keyPassword getAppKeyPassword()
+        }
+    }
+
+    android.applicationVariants.all { variant ->
+        variant.outputs.each { output ->
+            def file = output.outputFile
+            if (file != null && file.name.endsWith('.apk')) {
+                def buildType = variant.buildType.getName()
+                def flavorName = variant.getFlavorName()
+                def versionCode = defaultConfig.versionCode
+                //output.outputFileName = new File(file.parent, "MAP-${flavorName}-${buildType}.${versionCode}.apk")
+                def relativeRootDir = output.packageApplication.outputDirectory.toPath()
+                        .relativize(rootDir.toPath()).toFile()
+                output.outputFileName = new File( "$relativeRootDir/release", "MAP-${flavorName}-${buildType}.${versionCode}.apk")
+            }
+        }
+    }
+
+    android.variantFilter { variant ->
+        def flavors = variant.getFlavors()
+        if (!flavors.isEmpty()) {
+            def flavorName = flavors.get(0).name
+            def buildTypeName = variant.buildType.name
+
+            //Filter out the variants we're not interested in building.
+            def ignoreVariant = true
+            switch (buildTypeName) {
+                case "release":
+                    switch (flavorName) {
+                        case "prod":
+                        case "beta":
+                            ignoreVariant = false
+                            break
+                    }
+                    break;
+
+                case "debug":
+                    switch (flavorName) {
+                        case "dev":
+                            ignoreVariant = false
+                            break
+                    }
+                    break;
+            }
+
+            variant.setIgnore(ignoreVariant);
+        }
+    }
+
+    productFlavors {
+        dev {
+            applicationIdSuffix ".debug"
+            resValue "string", "app_title", "MAP Debug"
+            resValue "string", "map_api_key", GOOGLE_MAP_API_KEY_DEBUG
+            versionName generateVersionName(versionPrefix, versionMajor, versionMinor, versionPatch, "debug.${versionBuild}")
+
+            //Enable or disable crashlytics based on the availability of the api key
+            ext.enableCrashlytics = false
+        }
+
+        beta {
+            applicationIdSuffix ".beta"
+            resValue "string", "app_title", "MAP Beta"
+            resValue "string", "map_api_key", GOOGLE_MAP_API_KEY_BETA
+            versionName generateVersionName(versionPrefix, versionMajor, versionMinor, versionPatch, "beta.${versionBuild}")
+
+            //Enable or disable crashlytics based on the availability of the api key
+            ext.enableCrashlytics = hasFabricApiKey()
+        }
+
+        prod {
+            resValue "string", "app_title", "MAP"
+            resValue "string", "map_api_key", GOOGLE_MAP_API_KEY_PRODUCTION
+            buildConfigField "boolean", "WRITE_LOG_FILE", "false"
+
+            //Enable or disable crashlytics based on the availability of the api key
+            ext.enableCrashlytics = hasFabricApiKey()
+        }
+    }
+
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "ENABLE_CRASHLYTICS", "false"
+        }
+
+        release {
+            signingConfig signingConfigs.release
+            buildConfigField "boolean", "ENABLE_CRASHLYTICS", "${hasFabricApiKey()}"
+        }
+    }
+}
+
+/**
+ * @return The most recent git tag to be used as version name for the app.
+ */
+def getGitVersion(){
+    def cmd = "git describe --tag"
+    try {
+        def proc = cmd.execute()
+        return proc.text.trim()
+    }catch(IOException e){
+        //Unable to find 'git'
+        return "please update version name manually"
+    }
+}
+
+def getAppKeystoreFile() {
+    def filePath = hasProperty('COM_MAP_ANDROID_KEYSTORE') ? COM_MAP_ANDROID_KEYSTORE : null
+    return filePath ? file(filePath) : null
+}
+
+def getAppKeystorePassword(){
+    return hasProperty('COM_MAP_ANDROID_KEYSTORE_PWD') ? COM_MAP_ANDROID_KEYSTORE_PWD : ''
+}
+
+def getAppKeyPassword() {
+    return hasProperty('COM_MAP_ANDROID_KEY_PWD') ? COM_MAP_ANDROID_KEY_PWD : ''
+}
+
+def getAppKey() {
+    return hasProperty('COM_MAP_ANDROID_KEY_ALIAS') ? COM_MAP_ANDROID_KEY_ALIAS : ''
+}
+
+def getFabricApiKey(){
+    return hasFabricApiKey() ? COM_MAP_FABRIC_API_KEY : ''
+}
+
+def hasFabricApiKey(){
+    return hasProperty('COM_MAP_FABRIC_API_KEY')
+}
+
+def getSoloLinkIp() {
+    return '\"10.1.1.10\"'
+}
+
+def getLocalIp() {
+    try {
+        return '\"' + InetAddress.getLocalHost().getCanonicalHostName() + '\"'
+    }catch(Exception e){
+        return '\"\"'
+    }
+}

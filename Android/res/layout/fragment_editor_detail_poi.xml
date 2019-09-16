@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/missionItemDetailLayout"
+    >
+
+    <LinearLayout
+        android:id="@+id/title_rect"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_alignParentTop="true"
+        android:orientation="horizontal"
+        android:background="#00A655">
+
+        <TextView
+            android:id="@+id/WaypointIndex"
+            style="@style/largeMissionDetailText"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="0"
+            android:text="@string/label_poi_name"
+            android:textSize="20dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginRight="5dp" />
+
+        <EditText
+            android:id="@+id/et_poi_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:textColor="@color/white"
+            android:hint="POI_Name"
+            android:inputType="text"
+            android:backgroundTint="@color/white"/>
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_rect">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical" >
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="#00A655"
+                android:textColor="@color/all_white"
+                android:text="Latitude "/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <EditText
+                    android:id="@+id/et_latitude_ns"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="N/S"
+                    android:inputType="text" />
+                <EditText
+                    android:id="@+id/LatDegPic"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Deg"
+                    android:inputType="phone" />
+                <EditText
+                    android:id="@+id/LatMinPic"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Min"
+                    android:inputType="phone" />
+                <EditText
+                    android:id="@+id/LatSecPic"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Sec"
+                    android:inputType="phone" />
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="#00A655"
+                android:textColor="@color/all_white"
+                android:text="Longitude "/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+
+                <EditText
+                    android:id="@+id/et_longitude_ew"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="E/W"
+                    android:inputType="text" />
+                <EditText
+                    android:id="@+id/LongDegPic"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Deg"
+                    android:inputType="phone" />
+                <EditText
+                    android:id="@+id/LongMinPic"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Min"
+                    android:inputType="phone" />
+                <EditText
+                    android:id="@+id/LongSecPic"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Sec"
+                    android:inputType="phone" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal" >
+                <Button
+                    android:id="@+id/btn_confirm"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_confirm" />
+                <Button
+                    android:id="@+id/btn_cancel"
+                    android:layout_width="0dp"
+                    android:layout_weight="0.5"
+                    android:layout_height="wrap_content"
+                    android:text="@string/label_delete"
+                />
+            </LinearLayout>
+            <TextView
+                android:id="@+id/LatText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/all_black"
+                android:text=" "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/ModeDetailText"
+                android:background="@drawable/mode_desc_rectangle"
+                android:text=" "/>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

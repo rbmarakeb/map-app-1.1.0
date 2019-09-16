@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/cardview"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="3dp"
+    android:foreground="?android:selectableItemBackground"
+    card_view:cardBackgroundColor="@color/white"
+    card_view:cardCornerRadius="2dp"
+    card_view:cardElevation="1dp"
+    card_view:contentPadding="10dp">
+
+
+        <LinearLayout
+            android:id="@+id/lin_header"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentStart="true"
+            android:orientation="vertical"
+            >
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="start"
+                android:padding="5dp"
+                >
+                <ImageView
+                    android:id="@+id/warring_icon"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:src="@mipmap/ic_red_warning"
+                    android:contentDescription="@string/empty_content" />
+                <TextView
+                    android:id="@+id/title"
+                    android:layout_toEndOf="@+id/warring_icon"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@android:color/transparent"
+                    android:textColor="#C00101"
+                    android:text="@string/warning"
+                    android:textStyle="bold"
+                    android:textSize="19sp"
+                    android:paddingStart="10dp"
+                    android:layout_toRightOf="@+id/warring_icon"
+                    android:paddingLeft="10dp" />
+
+
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/item_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:text="@string/warning_message"
+                android:textColor="@color/all_black"
+                android:textSize="16sp"
+                />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="end"
+                >
+
+                <Button
+                    android:id="@+id/cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                     android:background="@android:color/transparent"
+                     android:textColor="#008577"
+                    android:text="@string/agree"
+                    android:textStyle="bold"
+                    />
+
+
+
+            </RelativeLayout>
+
+
+
+        </LinearLayout>
+
+</android.support.v7.widget.CardView>

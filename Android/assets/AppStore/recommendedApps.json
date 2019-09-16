@@ -1,0 +1,10 @@
+{
+    "apps": [
+        {
+            "applicationId": "com.map.android",
+            "appName": "MAP",
+            "appDescription" : "MAP is 3DR’s powerful and intuitive new flight control program. It provides everything you need to plan, fly and track any 3DR-powered drone.",
+            "appIconUrl" : "https://lh5.ggpht.com/3NLRo7-EEUFOCIRPDInbB79-Kbe5CThKpWYUuY3p-eiFcndr-i2kXNRigvu6WvQthSw=w300-rw"
+        }
+    ]
+}

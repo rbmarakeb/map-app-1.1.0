@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/location_button_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/my_location_button"
+        style="@style/Fab.MyLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_location" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/drone_location_button"
+        style="@style/Fab.MyLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:scaleType="centerInside"
+        android:src="@drawable/ic_navigate" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/zoom_to_fit_button"
+        style="@style/Fab.MyLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_expand"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/toggle_action_drawer"
+        style="@style/Fab.MyLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_flip"
+        android:visibility="gone"
+        tools:visibility="visible" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/poi_button"
+        style="@style/Fab.MyLocation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_poi" />
+
+    <ImageButton
+        android:id="@+id/zoomin"
+        android:contentDescription="@string/empty_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_zoomin"
+        android:tint="@color/grey700"
+        android:background="@color/white"
+        android:layout_marginTop="5dp"
+        android:scaleType="fitCenter"
+        />
+    <View
+        android:layout_width="30dp"
+        android:layout_height="2dp"
+        android:background="@color/grey700"
+        android:layout_marginLeft="5dp"
+        android:layout_marginRight="5dp"
+        />
+    <ImageButton
+        android:id="@+id/zoomout"
+        android:contentDescription="@string/empty_content"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:src="@drawable/ic_zoomout"
+        android:tint="@color/grey700"
+        android:background="@color/white"
+        android:scaleType="fitCenter"
+        />
+
+</LinearLayout>

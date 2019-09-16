@@ -1,0 +1,310 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/missionItemDetailLayout"
+    >
+
+    <com.map.android.view.spinners.SpinnerSelfSelect
+        android:id="@+id/spinnerWaypointType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp"
+        android:layout_alignParentTop="true"
+        android:entries="@array/ExampleWaypointType"
+        android:visibility="gone"
+        />
+
+    <RelativeLayout
+        android:id="@+id/title_rect"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:paddingLeft="10dp"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/wp_title_rectangle"
+        android:paddingTop="15dp"
+        android:paddingStart="10dp">
+
+
+
+        <RelativeLayout
+            android:id="@+id/title_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            >
+
+            <TextView
+                android:id="@+id/WaypointIndex"
+                style="@style/missionHeaderTitleNew"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                tools:text="22"
+                android:layout_toRightOf="@id/WaypointType"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="5dp" />
+
+            <View
+                android:id="@+id/title_div"
+                android:layout_width="1dp"
+                android:layout_marginTop="5dp"
+                android:layout_height="35dp"
+                android:layout_toRightOf="@id/WaypointIndex"
+                android:layout_alignParentTop="true"
+                android:background="@drawable/wp_title_div"/>
+            <TextView
+                android:id="@+id/WaypointType"
+                style="@style/missionHeaderTitleNew"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/waypointType_Waypoint"
+                android:textAllCaps="true"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:id="@+id/DistanceLabel"
+                style="@style/missionHeaderlabel"
+                android:layout_alignLeft="@id/WaypointType"
+                android:layout_below="@id/WaypointType"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/distance_to_home"/>
+
+            <TextView
+                android:id="@+id/DistanceValue"
+                style="@style/missionHeaderValue"
+                android:layout_toRightOf="@id/DistanceLabel"
+                android:layout_alignBaseline="@id/DistanceLabel"
+                android:layout_marginLeft="12dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="20m"/>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <ImageView
+        android:id="@+id/menuHint"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_alignBottom="@id/title_rect"
+        android:src="@drawable/ic_menu_hint"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        tools:ignore="ContentDescription"
+        android:layout_marginEnd="70dp"
+        android:layout_marginRight="70dp"
+        android:visibility="gone"
+        />
+    <ImageView
+        android:id="@+id/menuSelectFormat"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/ic_settings_grey600_24dp"
+        android:tint="@color/all_white"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        tools:ignore="ContentDescription"
+   />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title_rect">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@color/all_white"
+            android:orientation="vertical" >
+
+
+            <TextView
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/mode_desc_rectangle"
+                android:textColor="@color/all_white"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="Latitude "
+                android:padding="5dp"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:paddingTop="8dp"
+                android:paddingBottom="8dp">
+                <EditText
+                    android:id="@+id/waypointDelayPickera"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="N/S"
+                    android:background="@color/all_white"
+                    android:gravity="center"
+                    android:inputType="text" />
+                <EditText
+                    android:id="@+id/LatDegPic"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Deg"
+                    android:background="@color/all_white"
+                    android:gravity="center"
+                    android:inputType="phone" />
+
+                <EditText
+                    android:id="@+id/LatMinPic"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@color/all_white"
+                    android:gravity="center"
+                    android:hint="Min"
+                    android:inputType="phone" />
+                <EditText
+                    android:id="@+id/LatSecPic"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:hint="Sec"
+                    android:inputType="phone"
+                    android:background="@color/all_white"
+                    android:gravity="center"
+                    />
+
+            </LinearLayout>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:background="@drawable/mode_desc_rectangle"
+                android:textColor="@color/all_white"
+                android:textStyle="bold"
+                android:textSize="18sp"
+                android:text="Longitude "
+                android:padding="5dp"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp">
+
+            <EditText
+                android:id="@+id/altitudePickera"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="E/W"
+                android:background="@color/all_white"
+                android:gravity="center"
+                android:inputType="text" />
+            <EditText
+                android:id="@+id/LongDegPic"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Deg"
+                android:background="@color/all_white"
+                android:gravity="center"
+                android:inputType="phone" />
+            <EditText
+                android:id="@+id/LongMinPic"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Min"
+                android:background="@color/all_white"
+                android:gravity="center"
+                android:inputType="phone" />
+            <EditText
+                android:id="@+id/LongSecPic"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="wrap_content"
+                android:hint="Sec"
+                android:inputType="phone"
+                android:background="@color/all_white"
+                android:gravity="center"
+                />
+
+        </LinearLayout>
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:background="@drawable/mode_desc_rectangle"
+                android:gravity="center"
+                android:padding="5dp"
+                android:weightSum="1">
+                <Button
+                    android:id="@+id/newcoordconfirm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Confirm"
+                    android:textSize="16sp"
+                    android:textColor="@color/all_white"
+                    android:background="@android:color/transparent"
+                    android:layout_weight="0.5"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    />
+                <Button
+                    android:id="@+id/newcoordcancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel"
+                    android:textSize="16sp"
+                    android:background="@android:color/transparent"
+                    android:textColor="@color/all_white"
+                    android:layout_weight="0.5"
+                    android:textAllCaps="false"
+                    android:textStyle="bold"
+                    />
+            </LinearLayout>
+
+
+            <TextView
+                android:id="@+id/LatText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="@color/all_black"
+                android:text=" "/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                style="@style/ModeDetailText"
+                android:background="@drawable/mode_desc_rectangle"
+                android:text=" "
+                android:visibility="gone"/>
+
+            <com.map.android.view.spinnerWheel.CardWheelHorizontalView
+                android:id="@+id/altitudePicker"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:text="Longitude"
+                style="@style/missionItemDetailCard"
+                android:visibility="invisible"/>
+            <com.map.android.view.spinnerWheel.CardWheelHorizontalView
+                android:id="@+id/waypointDelayPicker"
+                android:layout_width="0dp"
+                android:layout_height="1dp"
+                android:layout_weight="0"
+                android:text="Lat"
+                android:visibility="invisible"
+                style="@style/missionItemDetailCard"/>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

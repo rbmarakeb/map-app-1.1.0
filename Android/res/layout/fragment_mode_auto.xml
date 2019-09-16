@@ -1,0 +1,193 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:background="@drawable/customborder"
+        android:orientation="vertical">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="start"
+            android:background="@color/blue_bg"
+            >
+
+         <ImageView
+                android:id="@+id/warring_icon"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
+                android:src="@mipmap/ic_red_warning"
+                android:layout_marginLeft="5dp"
+             android:layout_marginTop="5dp"
+                android:contentDescription="@string/empty_content" />
+        <TextView
+            android:id="@+id/ModeDetail"
+            style="@style/ModeDetailText"
+            android:layout_toEndOf="@+id/warring_icon"
+            android:layout_toRightOf="@+id/warring_icon"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/white"
+            android:paddingStart="10dp"
+            android:paddingLeft="10dp"
+            android:text="@string/mode_auto_des"
+             />
+        </RelativeLayout>
+        <ProgressBar
+            android:id="@+id/mission_progress"
+            style="?android:attr/progressBarStyleHorizontal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="0dp"
+            android:animationResolution="@android:integer/config_shortAnimTime"
+            android:indeterminate="false"
+            android:max="100"
+            android:progress="0"
+            android:background="@color/blue_bg"
+            android:progressBackgroundTint="@android:color/white"
+            android:progressTint="@android:color/white"/>
+
+        <LinearLayout
+            android:id="@+id/restart_line"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="start"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:id="@+id/restart_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_replay_white_24dp"
+                android:text="@string/restart_route"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:tint="@color/enable_text"
+                />
+
+            <TextView
+                android:id="@+id/restart_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/restart_route"
+                android:textColor="@color/enable_text"
+                android:gravity="center_vertical"
+                android:textStyle="normal"
+                android:textSize="18sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/select_waypoint_line"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:gravity="start"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <ImageView
+                android:id="@+id/select_waypoint_image"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:src="@drawable/ic_pin_drop_white_24dp"
+                android:text="@string/restart_route"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:tint="@color/disable_icon"
+                />
+
+            <TextView
+                android:id="@+id/select_waypoint_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="@string/select_waypoint"
+                android:textColor="@color/disable_text"
+                android:gravity="center_vertical"
+                android:textStyle="normal"
+                android:textSize="18sp" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_margin="5dp"
+            android:background="@drawable/button_blue"
+            android:gravity="center"
+            android:visibility="gone"
+            android:orientation="horizontal"
+            android:weightSum="1.0">
+
+            <ImageView
+                android:id="@+id/mc_pause"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_pause_white_24dp"/>
+
+
+            <ImageView
+                android:id="@+id/mc_restart"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight=".5"
+                android:background="?android:attr/selectableItemBackground"
+                android:clickable="true"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_replay_white_24dp"/>
+
+        </LinearLayout>
+
+
+        <com.map.android.view.spinnerWheel.CardWheelHorizontalView
+            android:id="@+id/waypoint_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:alpha="0.1"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:background="@drawable/mode_desc_rectangle"
+            android:gravity="center"
+            android:weightSum="1">
+            <Button
+                android:id="@+id/confirm"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                android:textSize="16sp"
+                android:textColor="@color/all_white"
+                android:background="@android:color/transparent"
+                android:layout_weight="0.5"
+                android:textAllCaps="false"
+                android:textStyle="normal"
+                />
+            <Button
+                android:id="@+id/cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Cancel"
+                android:textSize="16sp"
+                android:background="@android:color/transparent"
+                android:textColor="@color/all_white"
+                android:layout_weight="0.5"
+                android:textAllCaps="false"
+                android:textStyle="normal"
+                />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>

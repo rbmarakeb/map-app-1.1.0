@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<changelog bulletedList="true">
+
+    <!-- It is a template file for changelog.xml -->
+
+    <!-- Library uses res/raw/changelog.xml file.
+        If you want to use a custom file you can specify
+        chg:changeLogFileResourceId="@raw/custom_changelog"
+        in your View component in layout file -->
+
+
+    <changelogversion versionName="1.0.1" changeDate="Sep 12, 2018">
+        <changelogimprovement>Add POI (points of interest) feature</changelogimprovement>
+
+        <changelogtext>MAP Systems</changelogtext>
+    </changelogversion>
+
+</changelog>
